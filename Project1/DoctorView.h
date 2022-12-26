@@ -141,10 +141,13 @@ namespace Project1 {
 			// 
 			// dataGridView1
 			// 
+			this->dataGridView1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::ColumnHeader;
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ActiveBorder;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(263, 157);
+			this->dataGridView1->Location = System::Drawing::Point(264, 157);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
@@ -174,7 +177,7 @@ namespace Project1 {
 			this->btnSearch->FlatAppearance->BorderColor = System::Drawing::Color::DimGray;
 			this->btnSearch->Font = (gcnew System::Drawing::Font(L"Rockwell", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnSearch->Location = System::Drawing::Point(576, 87);
+			this->btnSearch->Location = System::Drawing::Point(576, 86);
 			this->btnSearch->Name = L"btnSearch";
 			this->btnSearch->Size = System::Drawing::Size(190, 33);
 			this->btnSearch->TabIndex = 5;
@@ -188,7 +191,7 @@ namespace Project1 {
 			this->btnPrescription->FlatAppearance->BorderColor = System::Drawing::Color::DimGray;
 			this->btnPrescription->Font = (gcnew System::Drawing::Font(L"Rockwell", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnPrescription->Location = System::Drawing::Point(576, 122);
+			this->btnPrescription->Location = System::Drawing::Point(576, 120);
 			this->btnPrescription->Name = L"btnPrescription";
 			this->btnPrescription->Size = System::Drawing::Size(190, 33);
 			this->btnPrescription->TabIndex = 6;
@@ -248,6 +251,7 @@ namespace Project1 {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dashboard-Doctor";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &DoctorView::DoctorView_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &DoctorView::DoctorView_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
@@ -292,9 +296,19 @@ private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) 
 
 private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 
-	MessageBox::Show("Do you want to logout?", "Dashboard", MessageBoxButtons::OKCancel, MessageBoxIcon::Question);
+	if (MessageBox::Show("Do you want to logout?", "Dashboard", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
 
-	this->Close();
+	}
+}
+
+
+private: System::Void DoctorView_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+	if (MessageBox::Show("Do you want to exit?", "Dashboard", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
+
+	}
+	else {
+		e->Cancel = true;
+	}
 }
 };
 }
