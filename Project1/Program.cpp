@@ -9,7 +9,7 @@ void main(array<String^>^ args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	Project1::LoginForm loginForm;
-	loginForm.ShowDialog();
+	Application::Run(% loginForm);
 
 	return;
 

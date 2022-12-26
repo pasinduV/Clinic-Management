@@ -295,6 +295,7 @@ namespace Project1 {
 					AdminView^ dashboard = gcnew AdminView();
 					dashboard->ShowDialog();
 				}
+				this->Close();
 			}
 			else {
 				MessageBox::Show("Email or password is incorrect","Login failed!", MessageBoxButtons::OK, MessageBoxIcon::Error);
