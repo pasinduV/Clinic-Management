@@ -11,7 +11,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace System::Data::SqlClient;
+	using namespace System::Data::OleDb;
 
 	/// <summary>
 	/// Summary for LoginForm
@@ -258,24 +258,25 @@ namespace Project1 {
 		}
 
 		try {
-			String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=ClinicDatabase;Integrated Security=True";
-			SqlConnection sqlConn(connString);
-			sqlConn.Open();
-			String^ sqlQuery;
+
+			String^ connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Cilin_Database.accdb";
+			OleDbConnection Conn(connString);
+			Conn.Open();
+			String^ oleQuery;
 
 			if (rbtnAdmin->Checked) {
-				sqlQuery = "SELECT * FROM admin WHERE Username=@username AND Password=@pwd;";
+				oleQuery = "SELECT * FROM admin WHERE Username=@username AND Password=@pwd;";
 			}
 
 			else {
-				sqlQuery = "SELECT * FROM doctors WHERE Username=@username AND Password=@pwd;";
+				oleQuery = "SELECT * FROM doctors WHERE Username=@username AND Password=@pwd;";
 			}
 			
-			SqlCommand command(sqlQuery, % sqlConn);
+			OleDbCommand command(oleQuery, %Conn);
 			command.Parameters->AddWithValue("@username", username);
 			command.Parameters->AddWithValue("@pwd", password);
 
-			SqlDataReader^ reader = command.ExecuteReader();
+			OleDbDataReader^ reader = command.ExecuteReader();
 			if (reader->Read()) {
 				user = gcnew User;
 
@@ -284,6 +285,7 @@ namespace Project1 {
 				user->Name = reader->GetString(3);
 
 				this->Hide();
+
 				//Swtiching to next window
 				if (rbtnDoctor->Checked) {
 					DoctorView^ dashboard = gcnew DoctorView(user);
