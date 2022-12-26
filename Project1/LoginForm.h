@@ -278,16 +278,15 @@ namespace Project1 {
 			SqlDataReader^ reader = command.ExecuteReader();
 			if (reader->Read()) {
 				user = gcnew User;
-				//user->Id = reader->GetInt32(0);
+
 				user->Username = reader->GetString(1);
 				user->Password = reader->GetString(2);
-
-				//MessageBox::Show("Login sucessfully! Welcome.","Message", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+				user->Name = reader->GetString(3);
 
 				this->Hide();
 				//Swtiching to next window
 				if (rbtnDoctor->Checked) {
-					DoctorView^ dashboard = gcnew DoctorView();
+					DoctorView^ dashboard = gcnew DoctorView(user);
 					dashboard->ShowDialog();
 				}
 				else {
@@ -302,7 +301,7 @@ namespace Project1 {
 			}
 
 		}
-		catch (Exception^ e) {
+		catch (Exception^ ex) {
 			MessageBox::Show("Failed to connect to database","Login failed!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			tbPassword->Text = String::Empty;
 		}

@@ -7,5 +7,6 @@ public:
 	int Id;
 	String^ Username;
 	String^ Password;
+	String^ Name;
 	
 };
