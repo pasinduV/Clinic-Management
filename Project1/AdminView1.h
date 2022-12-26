@@ -66,6 +66,7 @@ namespace Project1 {
 			this->Text = L"Dashboard-Admin";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion

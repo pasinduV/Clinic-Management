@@ -1,5 +1,6 @@
 #pragma once
 #include "User.h"
+#include "LoginForm.h"
 
 namespace Project1 {
 
@@ -162,13 +163,19 @@ namespace Project1 {
 
 		}
 #pragma 
+		String^ connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Cilin_Database.accdb";
+
+		void patientView() {
+
+			OleDbConnection Conn(connString);
+			Conn.Open();
+
+		}
 
 		
 	private: System::Void DoctorView_Load(System::Object^ sender, System::EventArgs^ e) {
 
-		String^ connString = "Data Source=localhost\\sqlexpress;Initial Catalog=ClinicDatabase;Integrated Security=True";
-		SqlConnection sqlConn(connString);
-		sqlConn.Open();
+
 	}
 
 private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
