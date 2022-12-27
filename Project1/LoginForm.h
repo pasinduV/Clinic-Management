@@ -259,9 +259,9 @@ namespace Project1 {
 
 		try {
 
-			String^ connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Cilin_Database.accdb";
-			OleDbConnection Conn(connString);
-			Conn.Open();
+			String^ conString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Cilin_Database.accdb";
+			OleDbConnection Con(conString);
+			Con.Open();
 			String^ oleQuery;
 
 			if (rbtnAdmin->Checked) {
@@ -272,7 +272,7 @@ namespace Project1 {
 				oleQuery = "SELECT * FROM doctors WHERE Username=@username AND Password=@pwd;";
 			}
 			
-			OleDbCommand command(oleQuery, %Conn);
+			OleDbCommand command(oleQuery, %Con);
 			command.Parameters->AddWithValue("@username", username);
 			command.Parameters->AddWithValue("@pwd", password);
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "User.h"
+#include "AddPrescription.h"
 
 namespace Project1 {
 
@@ -28,7 +29,6 @@ namespace Project1 {
 
 			timer1->Start();
 			
-			lbDoc->Text = "Dr."+user->Name;
 		}
 
 	protected:
@@ -147,9 +147,11 @@ namespace Project1 {
 			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::ColumnHeader;
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ActiveBorder;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->EditMode = System::Windows::Forms::DataGridViewEditMode::EditProgrammatically;
 			this->dataGridView1->Location = System::Drawing::Point(264, 157);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
+			this->dataGridView1->ReadOnly = true;
+			this->dataGridView1->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders;
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(503, 280);
 			this->dataGridView1->TabIndex = 3;
@@ -197,6 +199,7 @@ namespace Project1 {
 			this->btnPrescription->TabIndex = 6;
 			this->btnPrescription->Text = L"Add Prescription";
 			this->btnPrescription->UseVisualStyleBackColor = false;
+			this->btnPrescription->Click += gcnew System::EventHandler(this, &DoctorView::btnPrescription_Click);
 			// 
 			// llChngPass
 			// 
@@ -259,16 +262,16 @@ namespace Project1 {
 
 		}
 #pragma 
-public:User^ user = nullptr;
+public:User^ user ;
 
-		void patientView() {
+		void  patientView(){
 
-			OleDbConnection^ Conn = gcnew OleDbConnection ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Cilin_Database.accdb");
-			int checker;
-			Bitmap^ bitmap;
+			OleDbConnection^ Con = gcnew OleDbConnection ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Cilin_Database.accdb");
+			/*int checker;
+			Bitmap^ bitmap;*/
 
-			Conn->Open();
-			OleDbCommand^ cmd = Conn->CreateCommand();
+			Con->Open();
+			OleDbCommand^ cmd = Con->CreateCommand();
 			cmd->CommandType = CommandType::Text;
 			cmd->CommandText = "SELECT * FROM Patients";
 			cmd->ExecuteNonQuery();
@@ -277,38 +280,41 @@ public:User^ user = nullptr;
 			OleDbDataAdapter^ dp = gcnew OleDbDataAdapter(cmd);
 			dp->Fill(dt);
 			dataGridView1->DataSource = dt;
-			Conn->Close();
+			//Con->Close();
 
 		}
-		
 	private: System::Void DoctorView_Load(System::Object^ sender, System::EventArgs^ e) {
-
 		patientView();
-
 	}
 
-private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-
-	DateTime datetime = DateTime::Now;
-	this->lbDatetime->Text = datetime.ToString();
-}
-
-
-private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-
-	if (MessageBox::Show("Do you want to logout?", "Dashboard", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
-
+	private: System::Void btnPrescription_Click(System::Object^ sender, System::EventArgs^ e) {
+		AddPrescription^ prescriptionForm = gcnew AddPrescription();
+		prescriptionForm->ShowDialog();
 	}
-}
+	
 
+	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 
-private: System::Void DoctorView_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
-	if (MessageBox::Show("Do you want to exit?", "Dashboard", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
-
+		DateTime datetime = DateTime::Now;
+		this->lbDatetime->Text = datetime.ToString();
 	}
-	else {
-		e->Cancel = true;
+
+
+	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+
+		if (MessageBox::Show("Do you want to logout?", "Dashboard", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
+
+		}
 	}
-}
+
+
+	private: System::Void DoctorView_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		if (MessageBox::Show("Do you want to exit?", "Dashboard", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
+		
+		}
+		else {
+			e->Cancel = true;
+		}
+	}
 };
 }
