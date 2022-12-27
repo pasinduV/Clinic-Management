@@ -183,6 +183,7 @@ namespace Project1 {
 			this->btnSearch->TabIndex = 5;
 			this->btnSearch->Text = L"Search";
 			this->btnSearch->UseVisualStyleBackColor = false;
+			this->btnSearch->Click += gcnew System::EventHandler(this, &DoctorView::btnSearch_Click);
 			// 
 			// btnPrescription
 			// 
@@ -309,6 +310,8 @@ private: System::Void DoctorView_FormClosing(System::Object^ sender, System::Win
 	else {
 		e->Cancel = true;
 	}
+}
+private: System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {   
 }
 };
 }

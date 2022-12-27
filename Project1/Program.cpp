@@ -10,6 +10,9 @@ void main(array<String^>^ args)
 	Application::SetCompatibleTextRenderingDefault(false);
 	Project1::LoginForm loginForm;
 	Application::Run(% loginForm);
+	//Project1::AdminView AdminView;
+	//Application::Run(% AdminView);
+	
 
 	return;
 

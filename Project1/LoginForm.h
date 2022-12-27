@@ -291,6 +291,7 @@ namespace Project1 {
 					DoctorView^ dashboard = gcnew DoctorView(user);
 					dashboard->ShowDialog();
 				}
+
 				else {
 					AdminView^ dashboard = gcnew AdminView();
 					dashboard->ShowDialog();
