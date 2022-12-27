@@ -129,6 +129,7 @@ namespace Project1 {
 			this->btnSearchAP->TabIndex = 2;
 			this->btnSearchAP->Text = L"Search";
 			this->btnSearchAP->UseVisualStyleBackColor = true;
+			this->btnSearchAP->Click += gcnew System::EventHandler(this, &AddPrescription::btnSearchAP_Click);
 			// 
 			// lbID
 			// 
@@ -202,7 +203,6 @@ namespace Project1 {
 			this->textBox1->Location = System::Drawing::Point(136, 201);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->ReadOnly = true;
 			this->textBox1->Size = System::Drawing::Size(528, 95);
 			this->textBox1->TabIndex = 14;
 			// 
@@ -225,7 +225,6 @@ namespace Project1 {
 			this->tbDiseaseAP->Location = System::Drawing::Point(136, 100);
 			this->tbDiseaseAP->Multiline = true;
 			this->tbDiseaseAP->Name = L"tbDiseaseAP";
-			this->tbDiseaseAP->ReadOnly = true;
 			this->tbDiseaseAP->Size = System::Drawing::Size(528, 95);
 			this->tbDiseaseAP->TabIndex = 12;
 			// 
@@ -325,5 +324,14 @@ public: void patientView() {
 			Conn.Open();
 		}
 
+private: System::Void btnSearchAP_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	String^ search = this->tbSearchAP->Text;
+
+	if (search->Length == 0) {
+		MessageBox::Show("Please enter NIC/Patient ID", "Search", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		return;
+	}
+}
 };
 }
