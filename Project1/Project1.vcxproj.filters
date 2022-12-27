@@ -27,6 +27,9 @@
     <ClCompile Include="AdminView1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddPrescription.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoginForm.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AdminView1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPrescription.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

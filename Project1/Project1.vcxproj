@@ -123,12 +123,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddPrescription.cpp" />
     <ClCompile Include="AdminView1.cpp" />
     <ClCompile Include="DoctorView.cpp" />
     <ClCompile Include="LoginForm.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddPrescription.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="AdminView1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -141,6 +145,9 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddPrescription.resx">
+      <DependentUpon>AddPrescription.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminView1.resx">
       <DependentUpon>AdminView1.h</DependentUpon>
     </EmbeddedResource>
